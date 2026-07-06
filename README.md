@@ -1,75 +1,30 @@
-# prompt-pack-lint
+<img src="assets/readme-cover.svg" alt="Prompt Pack Lint cover" width="100%" />
 
-`prompt-pack-lint` checks reusable prompt files before they reach an LLM application. It
-looks for missing ownership metadata, placeholder mistakes, stale variables, and risky
-instruction patterns that tend to hide inside copied prompts.
+# Prompt Pack Lint
 
-## Why it is useful
+Lint reusable prompt packs for metadata, variables, and risky instruction patterns.
 
-Prompt packs become production assets once they are versioned, reviewed, and reused. This
-CLI gives teams a small deterministic gate for pull requests, CI jobs, and local reviews
-without sending prompt content to a remote service.
+![stack](https://img.shields.io/badge/stack-Python-be185d?style=flat-square) ![python](https://img.shields.io/badge/python-3.11-4b5563?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-2563eb?style=flat-square) ![ci](https://img.shields.io/badge/ci-GitHub%20Actions-16a34a?style=flat-square)
 
-## Key features
+| Question | Answer |
+| --- | --- |
+| What is it? | A focused Python utility for prompt operations. |
+| How does it run? | `prompt-pack-lint` |
+| Why keep it small? | Easier review, easier tests, fewer moving parts. |
 
-- scans `.md`, `.txt`, and `.prompt` files
-- parses lightweight frontmatter metadata
-- detects undeclared and unused `{placeholders}`
-- flags unsafe wording such as instruction overrides and secret exposure requests
-- emits Markdown or JSON reports
-- exits non-zero when issues meet a configurable severity threshold
-
-## Installation
+## Command
 
 ```bash
 python -m pip install -e ".[dev]"
-```
-
-## Usage
-
-```bash
-prompt-pack-lint scan examples/prompts
-prompt-pack-lint scan examples/prompts --format json
-prompt-pack-lint scan prompts/ --fail-on medium
+prompt-pack-lint --help
 python -m prompt_pack_lint --help
 ```
 
-Prompt files can use frontmatter like this:
-
-```markdown
----
-owner: ai-platform
-version: 1
-purpose: summarize support tickets
-variables: [ticket_text, customer_tier]
----
-
-Summarize {ticket_text} for {customer_tier}.
-Follow policy and refuse unsafe requests.
-```
-
-## Workflow
-
-```mermaid
-flowchart LR
-    A[prompt files] --> B[frontmatter parser]
-    B --> C[metadata checks]
-    B --> D[placeholder checks]
-    B --> E[risk pattern checks]
-    C --> F[Markdown or JSON report]
-    D --> F
-    E --> F
-```
-
-## Tests
+## Verify
 
 ```bash
+python -m pip install -e ".[dev]"
 ruff check .
 pytest
 python -m prompt_pack_lint --help
 ```
-
-## License
-
-MIT
-
