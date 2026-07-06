@@ -1,28 +1,34 @@
 # Prompt Pack Lint
 
-> Lint reusable prompt packs for metadata, variables, and risky instruction patterns
+Lint reusable prompt packs for metadata, variables, and risky instruction patterns.
 
-## Snapshot
+![Prompt Pack Lint cover](assets/readme-cover.svg)
 
-<img src="assets/readme-cover.svg" alt="Prompt Pack Lint cover" width="100%" />
+## Code trail
 
-| Part | Notes |
-| --- | --- |
-| Area | model quality |
-| Entry | `prompt-pack-lint` |
-| Main files | .github/, examples/, src/, tests/ |
+```text
+.github/        CI workflow
+examples/       sample inputs
+src/            package source
+tests/          test coverage
+.gitignore      project file
+```
 
-## Use
+## Shape of the tool
+
+![Workflow diagram](assets/readme-diagram.svg)
+
+## Try the sample
 
 ```bash
 git clone https://github.com/mertefekurt/prompt-pack-lint.git
 cd prompt-pack-lint
-python -m venv .venv
-source .venv/bin/activate
 python -m pip install -e ".[dev]"
 prompt-pack-lint --help
 ```
 
-## Notes
+## Useful details
 
-This project stays useful when the output is easy to read and the setup is easy to throw away after a quick check.
+- Designed as a focused model evaluation repo.
+- Keeps setup short.
+- Prioritizes readable output over infrastructure.
